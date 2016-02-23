@@ -1,6 +1,8 @@
 #include "Building.h"
 
-Building::Building(std::string name, double basePrice, double baseCps)
+using namespace std;
+
+Building::Building(string name, double basePrice, double baseCps)
 {
     this->name = name;
     this->basePrice = basePrice;
@@ -10,7 +12,7 @@ Building::Building(std::string name, double basePrice, double baseCps)
 
 Building::~Building()
 {
-    //dtor
+
 }
 
 double Building::GetCps(GameState* game)
@@ -18,8 +20,8 @@ double Building::GetCps(GameState* game)
     return baseCps * game->GetBuildingCount(id);
 }
 
-std::vector<Building*> Building::BuildingList;
-std::unordered_map<std::string, unsigned int> Building::BuildingNameIdMap;
+vector<Building*> Building::BuildingList;
+unordered_map<string, unsigned int> Building::BuildingNameIdMap;
 
 void Building::Initialize()
 {
@@ -53,12 +55,12 @@ Building* Building::Get(unsigned int id)
     return (id < 0 || id >= BuildingList.size()) ? NULL : BuildingList[id];
 }
 
-Building* Building::Get(std::string name)
+Building* Building::Get(string name)
 {
     return BuildingNameIdMap.count(name) == 0 ? NULL : Get(BuildingNameIdMap[name]);
 }
 
-std::vector<Building*> Building::GetList()
+vector<Building*> Building::GetList()
 {
     return BuildingList;
 }
