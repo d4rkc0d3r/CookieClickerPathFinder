@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
     Building::Initialize();
+    Upgrade::Initialize();
 
     GameState::FPS = 1;
     GameState::CLICKS_PER_SECOND = 4;
