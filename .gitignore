@@ -1,3 +1,9 @@
+*.layout
+*.depend
+*.exe
+obj/
+Debug/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
