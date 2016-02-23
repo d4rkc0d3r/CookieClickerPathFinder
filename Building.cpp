@@ -20,12 +20,12 @@ double Building::GetCps(GameState* game)
     return baseCps * game->GetBuildingCount(id);
 }
 
-vector<Building*> Building::BuildingList;
-unordered_map<string, unsigned int> Building::BuildingNameIdMap;
+vector<Building*> Building::List;
+unordered_map<string, unsigned int> Building::NameIdMap;
 
 void Building::Initialize()
 {
-    BuildingList = {
+    List = {
         new Building("cursor", 15, 0.1),
         new Building("grandma", 100, 1),
         new Building("farm", 1100, 8),
@@ -42,25 +42,25 @@ void Building::Initialize()
         new Building("prism", 2.1e15, 2.9e9)
     };
 
-    for(unsigned int i = 0; i < BuildingList.size(); i++)
+    for(unsigned int i = 0; i < List.size(); i++)
     {
-        Building* b = BuildingList[i];
+        Building* b = List[i];
         b->id = i;
-        BuildingNameIdMap[b->name] = i;
+        NameIdMap[b->name] = i;
     }
 }
 
 Building* Building::Get(unsigned int id)
 {
-    return (id < 0 || id >= BuildingList.size()) ? NULL : BuildingList[id];
+    return (id < 0 || id >= List.size()) ? NULL : List[id];
 }
 
 Building* Building::Get(string name)
 {
-    return BuildingNameIdMap.count(name) == 0 ? NULL : Get(BuildingNameIdMap[name]);
+    return NameIdMap.count(name) == 0 ? NULL : Get(NameIdMap[name]);
 }
 
 vector<Building*> Building::GetList()
 {
-    return BuildingList;
+    return List;
 }

@@ -29,8 +29,8 @@ class Building
     protected:
         Building(std::string name, double basePrice, double baseCps);
 
-        static std::vector<Building*> BuildingList;
-        static std::unordered_map<std::string, unsigned int> BuildingNameIdMap;
+        static std::vector<Building*> List;
+        static std::unordered_map<std::string, unsigned int> NameIdMap;
 
     private:
 };
