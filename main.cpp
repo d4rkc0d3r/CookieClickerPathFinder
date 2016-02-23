@@ -2,6 +2,7 @@
 
 #include "GameState.h"
 #include "Building.h"
+#include "Upgrade.h"
 
 #include "conio.h"
 

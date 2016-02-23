@@ -1,8 +1,9 @@
 #include "Upgrade.h"
+#include "Upgrades\CookieUpgrade.h"
 
 using namespace std;
 
-Upgrade::Upgrade(string name, double basePrice)
+Upgrade::Upgrade(string name, double basePrice, string type) : type(type)
 {
     this->name = name;
     this->basePrice = basePrice;
@@ -18,7 +19,7 @@ unordered_map<string, unsigned int> Upgrade::NameIdMap;
 
 void Upgrade::Initialize()
 {
-    // add initialize functions of upgrade classes here
+    CookieUpgrade::Initialize();
 
     for(unsigned int i = 0; i < List.size(); i++)
     {

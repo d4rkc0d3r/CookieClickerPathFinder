@@ -26,7 +26,7 @@ class Upgrade
         static std::vector<Upgrade*> GetList();
 
     protected:
-        Upgrade(std::string name, double basePrice);
+        Upgrade(std::string name, double basePrice, std::string type);
 
         static std::vector<Upgrade*> List;
         static std::unordered_map<std::string, unsigned int> NameIdMap;
