@@ -20,7 +20,8 @@ class Building
 
         double GetCps(GameState* game);
 
-        static void InitializeBuildings();
+        static void Initialize();
+
         static Building* Get(unsigned int id);
         static Building* Get(std::string name);
         static std::vector<Building*> GetList();

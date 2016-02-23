@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    Building::InitializeBuildings();
+    Building::Initialize();
 
     GameState::FPS = 1;
     GameState::CLICKS_PER_SECOND = 4;

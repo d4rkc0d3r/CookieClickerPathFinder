@@ -21,7 +21,7 @@ double Building::GetCps(GameState* game)
 std::vector<Building*> Building::BuildingList;
 std::unordered_map<std::string, unsigned int> Building::BuildingNameIdMap;
 
-void Building::InitializeBuildings()
+void Building::Initialize()
 {
     BuildingList = {
         new Building("cursor", 15, 0.1),
