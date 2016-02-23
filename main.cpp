@@ -11,18 +11,28 @@ int main()
 {
     Building::InitializeBuildings();
 
+    GameState::FPS = 1;
+    GameState::CLICKS_PER_SECOND = 4;
+    GameState::WAIT_TIME_PER_PURCHASE = 3;
+
+    unordered_set<char> output = {'+'/*, '~', '-'*/};
+
+    double targetCookies = 1e5;
+
+    bool buyAlsoStuffThatIsCheapEnoughtToBuy = true;
+
     GameState g;
     list<GameState> gameStates;
 
-    GameState::FPS = 1;
-    GameState::CLICKS_PER_SECOND = 30;
-    GameState::WAIT_TIME_PER_PURCHASE = 0;
-
-    g.EarnCookies(15);
-    g.AdvanceSeconds(5);
-    g.BuyBuilding("cursor");
+    if(GameState::CLICKS_PER_SECOND == 0)
+    {
+        g.EarnCookies(15);
+        g.AdvanceSeconds(5);
+        g.BuyBuilding("cursor");
+    }
 
     gameStates.push_back(g);
+
     double lastCookiesPlusQuarterHourProduction = 0;
     while(gameStates.size() > 0)
     {
@@ -46,13 +56,19 @@ int main()
                 double testCps = (*i).CalculateCps();
                 if(testCps > gCps || (testCps == gCps && (*i).AllTimeCookies() > g.AllTimeCookies()))
                 {
-                    //cout << "-" << g.ToString() << endl;
+                    if(output.count('-'))
+                    {
+                        cout << "-" << g.ToString() << endl;
+                    }
                     gCps = testCps;
                     g = (*i);
                 }
                 else
                 {
-                    //cout << "-" << (*i).ToString() << endl;
+                    if(output.count('-'))
+                    {
+                        cout << "-" << (*i).ToString() << endl;
+                    }
                 }
                 gameStates.erase(i++);
             }
@@ -65,20 +81,25 @@ int main()
         double testFor = gCps * 60 * 15 + g.AllTimeCookies();
         if(lastCookiesPlusQuarterHourProduction * 0.8 > testFor)
         {
-            cout << "~";
+            if(output.count('~'))
+            {
+                cout << "~" << g.ToString() << endl;
+            }
         }
         else
         {
-            cout << "+";
-            for(GameState gs : g.CalculateNextGameStates(true))
+            if(output.count('+'))
+            {
+                cout << "+" << g.ToString() << endl;
+            }
+            for(GameState gs : g.CalculateNextGameStates(buyAlsoStuffThatIsCheapEnoughtToBuy))
             {
                 gameStates.push_back(gs);
             }
         }
         if(testFor > lastCookiesPlusQuarterHourProduction)
             lastCookiesPlusQuarterHourProduction = testFor;
-        cout << g.ToString() << endl;
-        if(g.AllTimeCookies() >= 1e9)
+        if(g.AllTimeCookies() >= targetCookies)
         {
             for(string s : g.history)
             {
