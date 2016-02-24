@@ -12,9 +12,9 @@ CookieUpgrade::~CookieUpgrade()
 
 }
 
-bool CookieUpgrade::IsUnlocked(GameState game)
+bool CookieUpgrade::IsUnlocked(GameState* game)
 {
-    return game.AllTimeCookies() >= unlockPrice;
+    return game->AllTimeCookies() >= unlockPrice;
 }
 
 void CookieUpgrade::Initialize()

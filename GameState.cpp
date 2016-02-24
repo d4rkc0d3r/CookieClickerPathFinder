@@ -1,12 +1,16 @@
 #include "GameState.h"
 #include <sstream>
 #include <cmath>
+#include <iostream>
+
+#include "Upgrades\CookieUpgrade.h"
 
 using namespace std;
 
 int GameState::FPS = 1;
 int GameState::CLICKS_PER_SECOND = 1;
 double GameState::WAIT_TIME_PER_PURCHASE = 0;
+bool GameState::BUY_UPGRADES = true;
 
 string formatTime(int t)
 {
@@ -80,6 +84,29 @@ list<GameState> GameState::CalculateNextGameStates(bool buyAffordableStuff)
         result.push_back(g);
     }
 
+    if(BUY_UPGRADES)
+    {
+        for(Upgrade* upgrade : Upgrade::GetList())
+        {
+            double price = upgrade->basePrice;
+            if((price <= cookies && (!buyAffordableStuff))
+               || (cps <= 0 && price > cookies)
+               || !upgrade->IsUnlocked(this)
+               || boughtUpgrades.count(upgrade) > 0)
+                continue;
+            GameState g(this);
+            if(price > cookies)
+            {
+                double t = (price - cookies) / cps;
+                if(t > FPS * 60 * 60 * 24)
+                    continue;
+                g.AdvanceSeconds(t);
+            }
+            g.BuyUpgrade(upgrade);
+            result.push_back(g);
+        }
+    }
+
     return result;
 }
 
@@ -131,6 +158,20 @@ void GameState::BuyBuilding(Building* building)
                       + to_string((long long)price) + " cookies");
 }
 
+void GameState::BuyUpgrade(Upgrade* upgrade)
+{
+    if(upgrade == NULL
+        || boughtUpgrades.count(upgrade) > 0
+        || upgrade->basePrice > cookies
+        || !upgrade->IsUnlocked(this))
+        return;
+    AdvanceSeconds(WAIT_TIME_PER_PURCHASE);
+    boughtUpgrades.insert(upgrade);
+    cookies -= upgrade->basePrice;
+    history.push_back(formatTime(time) + " buy upgrade " + upgrade->name
+                      + " for " + to_string((long long)upgrade->basePrice) + " cookies");
+}
+
 string GameState::ToString()
 {
     stringstream ss;
@@ -165,6 +206,14 @@ double GameState::CalculateCps()
     for(auto b : Building::GetList())
     {
         cps += b->GetCps(this);
+    }
+
+    for(Upgrade* upgrade : boughtUpgrades)
+    {
+        if(upgrade->type.compare("cookie") == 0)
+        {
+             cps *= ((CookieUpgrade*)upgrade)->multiplier;
+        }
     }
 
     return cps + CLICKS_PER_SECOND;

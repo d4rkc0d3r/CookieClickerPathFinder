@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unordered_set>
 
 #include "GameState.h"
 #include "Building.h"
@@ -15,11 +16,12 @@ int main()
 
     GameState::FPS = 1;
     GameState::CLICKS_PER_SECOND = 4;
-    GameState::WAIT_TIME_PER_PURCHASE = 3;
+    GameState::WAIT_TIME_PER_PURCHASE = 1;
+    GameState::BUY_UPGRADES = true;
 
     unordered_set<char> output = {'+'/*, '~', '-'*/};
 
-    double targetCookies = 1e5;
+    double targetCookies = 1e6;
 
     bool buyAlsoStuffThatIsCheapEnoughtToBuy = true;
 

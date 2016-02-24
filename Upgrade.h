@@ -6,6 +6,8 @@
 #include <vector>
 #include "GameState.h"
 
+class GameState;
+
 class Upgrade
 {
     public:
@@ -17,7 +19,7 @@ class Upgrade
         unsigned int id;
         double basePrice;
 
-        virtual bool IsUnlocked(GameState game) = 0;
+        virtual bool IsUnlocked(GameState* game) = 0;
 
         static void Initialize();
 

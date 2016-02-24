@@ -2,12 +2,14 @@
 #define GAMESTATE_H
 
 #include <vector>
-#include <unordered_set>
+#include <set>
 #include "Building.h"
 #include <list>
 #include <string>
+#include "Upgrade.h"
 
 class Building;
+class Upgrade;
 
 class GameState
 {
@@ -19,6 +21,7 @@ class GameState
         static int FPS;
         static int CLICKS_PER_SECOND;
         static double WAIT_TIME_PER_PURCHASE;
+        static bool BUY_UPGRADES;
 
         long long time; // time since start in frames
 
@@ -43,6 +46,8 @@ class GameState
         void BuyBuilding(Building* building);
         void BuyBuilding(int id);
 
+        void BuyUpgrade(Upgrade* uprade);
+
         std::string ToString();
     protected:
 
@@ -51,7 +56,7 @@ class GameState
         double allTimeCookies;
 
         std::vector<int> buildings;
-        std::unordered_set<std::string> boughtUpgrades;
+        std::set<Upgrade*> boughtUpgrades;
 };
 
 #endif // GAMESTATE_H

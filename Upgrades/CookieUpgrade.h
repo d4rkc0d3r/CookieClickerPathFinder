@@ -3,6 +3,8 @@
 
 #include "../Upgrade.h"
 
+class Upgrade;
+class GameState;
 
 class CookieUpgrade : public Upgrade
 {
@@ -12,7 +14,7 @@ class CookieUpgrade : public Upgrade
         double unlockPrice;
         double multiplier;
 
-        bool IsUnlocked(GameState game);
+        bool IsUnlocked(GameState* game);
 
         static void Initialize();
 

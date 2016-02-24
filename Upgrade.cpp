@@ -23,9 +23,9 @@ void Upgrade::Initialize()
 
     for(unsigned int i = 0; i < List.size(); i++)
     {
-        Upgrade* b = List[i];
-        b->id = i;
-        NameIdMap[b->name] = i;
+        Upgrade* u = List[i];
+        u->id = i;
+        NameIdMap[u->name] = i;
     }
 }
 
