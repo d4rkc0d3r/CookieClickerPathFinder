@@ -14,10 +14,10 @@ class Upgrade
         virtual ~Upgrade();
 
         const std::string type;
+        const std::string name;
+        const double basePrice;
 
-        std::string name;
         unsigned int id;
-        double basePrice;
 
         virtual bool IsUnlocked(GameState* game) = 0;
 

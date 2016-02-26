@@ -3,10 +3,9 @@
 
 using namespace std;
 
-Upgrade::Upgrade(string name, double basePrice, string type) : type(type)
+Upgrade::Upgrade(string name, double basePrice, string type) : type(type), name(name), basePrice(basePrice)
 {
-    this->name = name;
-    this->basePrice = basePrice;
+
 }
 
 Upgrade::~Upgrade()

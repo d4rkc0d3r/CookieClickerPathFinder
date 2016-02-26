@@ -11,8 +11,8 @@ class CookieUpgrade : public Upgrade
     public:
         virtual ~CookieUpgrade();
 
-        double unlockPrice;
-        double multiplier;
+        const double unlockPrice;
+        const double multiplier;
 
         bool IsUnlocked(GameState* game);
 

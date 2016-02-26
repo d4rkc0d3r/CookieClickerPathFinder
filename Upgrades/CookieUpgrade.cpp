@@ -1,10 +1,11 @@
 #include "CookieUpgrade.h"
 
-CookieUpgrade::CookieUpgrade(std::string name, double basePrice, double unlockPrice, double multiplier)
-    : Upgrade(name, basePrice, "cookie")
+using namespace std;
+
+CookieUpgrade::CookieUpgrade(string name, double basePrice, double unlockPrice, double multiplier)
+    : Upgrade(name, basePrice, "cookie"), unlockPrice(unlockPrice), multiplier(multiplier)
 {
-    this->unlockPrice = unlockPrice;
-    this->multiplier = multiplier;
+
 }
 
 CookieUpgrade::~CookieUpgrade()
