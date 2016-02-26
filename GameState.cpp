@@ -121,11 +121,11 @@ void GameState::EarnCookies(double cookies)
     this->allTimeCookies += cookies;
 }
 
-void GameState::AdvanceSeconds(double seconds)
+void GameState::AdvanceSeconds(double seconds, bool click)
 {
     long long frames = (long long)ceil(seconds * FPS);
     time += frames;
-    EarnCookies(CalculateCps() * frames / FPS);
+    EarnCookies(CalculateCps(click) * frames / FPS);
 }
 
 double GameState::GetBuildingPrice(Building* building)
@@ -150,7 +150,7 @@ void GameState::BuyBuilding(Building* building)
     double price = GetBuildingPrice(building);
     if(price > cookies)
         return;
-    AdvanceSeconds(WAIT_TIME_PER_PURCHASE);
+    AdvanceSeconds(WAIT_TIME_PER_PURCHASE, false);
     buildings[building->id]++;
     cookies -= price;
     history.push_back(formatTime(time) + " buy " + building->name + " number "
@@ -161,15 +161,20 @@ void GameState::BuyBuilding(Building* building)
 void GameState::BuyUpgrade(Upgrade* upgrade)
 {
     if(upgrade == NULL
-        || boughtUpgrades.count(upgrade) > 0
+        || HasUpgrade(upgrade)
         || upgrade->basePrice > cookies
         || !upgrade->IsUnlocked(this))
         return;
-    AdvanceSeconds(WAIT_TIME_PER_PURCHASE);
+    AdvanceSeconds(WAIT_TIME_PER_PURCHASE, false);
     boughtUpgrades.insert(upgrade);
     cookies -= upgrade->basePrice;
     history.push_back(formatTime(time) + " buy upgrade " + upgrade->name
                       + " for " + to_string((long long)upgrade->basePrice) + " cookies");
+}
+
+bool GameState::HasUpgrade(Upgrade* upgrade)
+{
+    return boughtUpgrades.count(upgrade) > 0;
 }
 
 string GameState::ToString()
@@ -199,7 +204,7 @@ double GameState::AllTimeCookies()
     return allTimeCookies;
 }
 
-double GameState::CalculateCps()
+double GameState::CalculateCps(bool includeClicks)
 {
     double cps = 0;
 
@@ -216,7 +221,18 @@ double GameState::CalculateCps()
         }
     }
 
-    return cps + CLICKS_PER_SECOND;
+    if(includeClicks)
+    {
+        double clickCps = CLICKS_PER_SECOND;
+
+        clickCps *= (HasUpgrade(Upgrade::Get("Reinforced index finger"))) ? 2 : 1;
+        clickCps *= (HasUpgrade(Upgrade::Get("Carpal tunnel prevention cream"))) ? 2 : 1;
+        clickCps *= (HasUpgrade(Upgrade::Get("Ambidextrous"))) ? 2 : 1;
+
+        cps += clickCps;
+    }
+
+    return cps;
 }
 
 int GameState::GetBuildingCount(Building* building)

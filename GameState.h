@@ -35,18 +35,20 @@ class GameState
 
         std::list<GameState> CalculateNextGameStates(bool buyAffordableStuff = false);
 
-        double CalculateCps();
+        double CalculateCps(bool includeClicks = true);
         double GetBank();
         double AllTimeCookies();
         void EarnCookies(double cookies);
 
-        void AdvanceSeconds(double seconds);
+        void AdvanceSeconds(double seconds, bool click = true);
 
         void BuyBuilding(std::string building);
         void BuyBuilding(Building* building);
         void BuyBuilding(int id);
 
-        void BuyUpgrade(Upgrade* uprade);
+        void BuyUpgrade(Upgrade* upgrade);
+
+        bool HasUpgrade(Upgrade* upgrade);
 
         std::string ToString();
     protected:

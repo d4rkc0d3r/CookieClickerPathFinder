@@ -1,4 +1,5 @@
 #include "Building.h"
+#include "Upgrades\BuildingMultiplierUpgrade.h"
 
 using namespace std;
 
@@ -17,7 +18,21 @@ Building::~Building()
 
 double Building::GetCps(GameState* game)
 {
-    return baseCps * game->GetBuildingCount(id);
+    double cps = baseCps;
+
+    for(Upgrade* upgrade : upgrades)
+    {
+        if(!game->HasUpgrade(upgrade))
+        {
+            continue;
+        }
+        if(upgrade->type.compare("building_multiplier") == 0)
+        {
+            cps *= ((BuildingMultiplierUpgrade*)upgrade)->multiplier;
+        }
+    }
+
+    return cps * game->GetBuildingCount(id);
 }
 
 vector<Building*> Building::List;

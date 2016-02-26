@@ -7,6 +7,7 @@
 #include "GameState.h"
 
 class GameState;
+class Upgrade;
 
 class Building
 {
@@ -17,6 +18,8 @@ class Building
         double basePrice;
         double baseCps;
         unsigned int id;
+
+        std::vector<Upgrade*> upgrades;
 
         double GetCps(GameState* game);
 

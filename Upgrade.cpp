@@ -1,11 +1,12 @@
 #include "Upgrade.h"
 #include "Upgrades\CookieUpgrade.h"
+#include "Upgrades\BuildingMultiplierUpgrade.h"
 
 using namespace std;
 
 Upgrade::Upgrade(string name, double basePrice, string type) : type(type), name(name), basePrice(basePrice)
 {
-
+    id = -1;
 }
 
 Upgrade::~Upgrade()
@@ -19,6 +20,7 @@ unordered_map<string, unsigned int> Upgrade::NameIdMap;
 void Upgrade::Initialize()
 {
     CookieUpgrade::Initialize();
+    BuildingMultiplierUpgrade::Initialize();
 
     for(unsigned int i = 0; i < List.size(); i++)
     {
