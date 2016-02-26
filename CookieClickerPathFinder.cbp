@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="Upgrades" />
+					<Add directory="Upgrades/" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +25,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="Upgrades" />
+					<Add directory="Upgrades/" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -40,6 +42,8 @@
 		<Unit filename="GameState.h" />
 		<Unit filename="Upgrade.cpp" />
 		<Unit filename="Upgrade.h" />
+		<Unit filename="Upgrades/BuildingMultiplierUpgrade.cpp" />
+		<Unit filename="Upgrades/BuildingMultiplierUpgrade.h" />
 		<Unit filename="Upgrades/CookieUpgrade.cpp" />
 		<Unit filename="Upgrades/CookieUpgrade.h" />
 		<Unit filename="main.cpp" />
