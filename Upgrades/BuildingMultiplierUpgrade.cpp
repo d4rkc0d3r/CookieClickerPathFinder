@@ -55,5 +55,23 @@ void BuildingMultiplierUpgrade::Initialize()
         new BuildingMultiplierUpgrade("Coreforge", 6e12, "mine", 150),
         new BuildingMultiplierUpgrade("Planetsplitters", 6e15, "mine", 200),
         new BuildingMultiplierUpgrade("Canola oil wells", 6e18, "mine", 250),
+
+        new BuildingMultiplierUpgrade("Sturdier conveyor belts", 1.3e6, "factory", 1),
+        new BuildingMultiplierUpgrade("Child labor", 6.5e6, "factory", 5),
+        new BuildingMultiplierUpgrade("Sweatshop", 6.5e7, "factory", 25),
+        new BuildingMultiplierUpgrade("Radium reactors", 6.5e9, "factory", 50),
+        new BuildingMultiplierUpgrade("Recombobulators", 6.5e11, "factory", 100),
+        new BuildingMultiplierUpgrade("Deep-bake process", 6.5e13, "factory", 150),
+        new BuildingMultiplierUpgrade("Cyborg workforce", 6.5e16, "factory", 200),
+        new BuildingMultiplierUpgrade("78-hour days", 6.5e19, "factory", 250),
+
+        new BuildingMultiplierUpgrade("Sturdier conveyor belts", 1.4e7, "bank", 1),
+        new BuildingMultiplierUpgrade("Child labor", 7e7, "bank", 5),
+        new BuildingMultiplierUpgrade("Sweatshop", 7e8, "bank", 25),
+        new BuildingMultiplierUpgrade("Radium reactors", 7e10, "bank", 50),
+        new BuildingMultiplierUpgrade("Recombobulators", 7e12, "bank", 100),
+        new BuildingMultiplierUpgrade("Deep-bake process", 7e14, "bank", 150),
+        new BuildingMultiplierUpgrade("Cyborg workforce", 7e17, "bank", 200),
+        new BuildingMultiplierUpgrade("78-hour days", 7e20, "bank", 250),
     });
 }
