@@ -65,13 +65,13 @@ void BuildingMultiplierUpgrade::Initialize()
         new BuildingMultiplierUpgrade("Cyborg workforce", 6.5e16, "factory", 200),
         new BuildingMultiplierUpgrade("78-hour days", 6.5e19, "factory", 250),
 
-        new BuildingMultiplierUpgrade("Sturdier conveyor belts", 1.4e7, "bank", 1),
-        new BuildingMultiplierUpgrade("Child labor", 7e7, "bank", 5),
-        new BuildingMultiplierUpgrade("Sweatshop", 7e8, "bank", 25),
-        new BuildingMultiplierUpgrade("Radium reactors", 7e10, "bank", 50),
-        new BuildingMultiplierUpgrade("Recombobulators", 7e12, "bank", 100),
-        new BuildingMultiplierUpgrade("Deep-bake process", 7e14, "bank", 150),
-        new BuildingMultiplierUpgrade("Cyborg workforce", 7e17, "bank", 200),
-        new BuildingMultiplierUpgrade("78-hour days", 7e20, "bank", 250),
+        new BuildingMultiplierUpgrade("Taller tellers", 1.4e7, "bank", 1),
+        new BuildingMultiplierUpgrade("Scissor-resistant credit cards", 7e7, "bank", 5),
+        new BuildingMultiplierUpgrade("Acid-proof vaults", 7e8, "bank", 25),
+        new BuildingMultiplierUpgrade("Chocolate coins", 7e10, "bank", 50),
+        new BuildingMultiplierUpgrade("Exponential interest rates", 7e12, "bank", 100),
+        new BuildingMultiplierUpgrade("Financial zen", 7e14, "bank", 150),
+        new BuildingMultiplierUpgrade("Way of the wallet", 7e17, "bank", 200),
+        new BuildingMultiplierUpgrade("The stuff rationale", 7e20, "bank", 250),
     });
 }
