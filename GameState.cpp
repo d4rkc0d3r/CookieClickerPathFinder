@@ -143,6 +143,11 @@ void GameState::BuyBuilding(int id)
     BuyBuilding(Building::Get(id));
 }
 
+void GameState::AddHistoryEntry(string entry)
+{
+    history.push_back(formatTime(time) + " " + entry);
+}
+
 void GameState::BuyBuilding(Building* building)
 {
     if(building == NULL)
@@ -151,11 +156,14 @@ void GameState::BuyBuilding(Building* building)
     if(price > cookies)
         return;
     AdvanceSeconds(WAIT_TIME_PER_PURCHASE, false);
+    double cps1 = CalculateCps();
     buildings[building->id]++;
     cookies -= price;
-    history.push_back(formatTime(time) + " buy " + building->name + " number "
-                      + to_string(buildings[building->id]) + " for "
-                      + to_string((long long)price) + " cookies");
+    double cps2 = CalculateCps();
+    AddHistoryEntry("buy " + building->name + " number "
+                    + to_string(buildings[building->id]) + " for "
+                    + to_string((long long)price) + " cookies"
+                    + " (+" + to_string((cps2 / cps1 - 1) * 100) + "% cps)");
 }
 
 void GameState::BuyUpgrade(Upgrade* upgrade)
@@ -166,10 +174,13 @@ void GameState::BuyUpgrade(Upgrade* upgrade)
         || !upgrade->IsUnlocked(this))
         return;
     AdvanceSeconds(WAIT_TIME_PER_PURCHASE, false);
+    double cps1 = CalculateCps();
     boughtUpgrades.insert(upgrade);
     cookies -= upgrade->basePrice;
-    history.push_back(formatTime(time) + " buy upgrade " + upgrade->name
-                      + " for " + to_string((long long)upgrade->basePrice) + " cookies");
+    double cps2 = CalculateCps();
+    AddHistoryEntry("buy UPGRADE " + upgrade->name
+                    + " for " + to_string((long long)upgrade->basePrice) + " cookies"
+                    + " (+" + to_string((cps2 / cps1 - 1) * 100) + "% cps)");
 }
 
 bool GameState::HasUpgrade(Upgrade* upgrade)

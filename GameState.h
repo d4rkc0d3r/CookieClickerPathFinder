@@ -59,6 +59,8 @@ class GameState
 
         std::vector<int> buildings;
         std::set<Upgrade*> boughtUpgrades;
+
+        void AddHistoryEntry(std::string entry);
 };
 
 #endif // GAMESTATE_H
