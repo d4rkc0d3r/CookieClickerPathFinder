@@ -1,6 +1,7 @@
 #include "Upgrade.h"
 #include "Upgrades\CookieUpgrade.h"
 #include "Upgrades\BuildingMultiplierUpgrade.h"
+#include "Upgrades\GrandmaUpgrade.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ void Upgrade::Initialize()
 {
     CookieUpgrade::Initialize();
     BuildingMultiplierUpgrade::Initialize();
+    GrandmaUpgrade::Initialize();
 
     for(unsigned int i = 0; i < List.size(); i++)
     {

@@ -1,5 +1,6 @@
 #include "Building.h"
 #include "Upgrades\BuildingMultiplierUpgrade.h"
+#include "Upgrades\GrandmaUpgrade.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ double Building::GetCps(GameState* game)
 {
     double cps = baseCps;
 
+    bool isGrandma = name.compare("grandma") == 0;
+
     for(Upgrade* upgrade : upgrades)
     {
         if(!game->HasUpgrade(upgrade))
@@ -29,6 +32,17 @@ double Building::GetCps(GameState* game)
         if(upgrade->type.compare("building_multiplier") == 0)
         {
             cps *= ((BuildingMultiplierUpgrade*)upgrade)->multiplier;
+        }
+        else if(upgrade->type.compare("grandma_upgrade") == 0)
+        {
+            if(isGrandma)
+            {
+                cps *= 2;
+            }
+            else
+            {
+                cps *= (1 + game->GetBuildingCount("grandma") * ((GrandmaUpgrade*)upgrade)->multiplierPerGrandma);
+            }
         }
     }
 

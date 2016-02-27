@@ -46,6 +46,8 @@
 		<Unit filename="Upgrades/BuildingMultiplierUpgrade.h" />
 		<Unit filename="Upgrades/CookieUpgrade.cpp" />
 		<Unit filename="Upgrades/CookieUpgrade.h" />
+		<Unit filename="Upgrades/GrandmaUpgrade.cpp" />
+		<Unit filename="Upgrades/GrandmaUpgrade.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
